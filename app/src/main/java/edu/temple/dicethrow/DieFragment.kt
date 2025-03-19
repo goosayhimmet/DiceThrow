@@ -19,12 +19,18 @@ class DieFragment : Fragment() {
 
     private var currentValue: Int? = null
 
+
+    companion object{
+        fun newInstance(sides: Int = 6) = DieFragment().apply {
+            arguments = Bundle().apply {
+                putInt(DIESIDE, sides)
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            it.getInt(DIESIDE).run {
-                dieSides = this
-            }
+            dieSides = it.getInt(DIESIDE, 6)
         }
 
         savedInstanceState?.let {
